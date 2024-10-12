@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 
 const Table = styled.table`
-    width: 400px;
+    width: 500px;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0px 0px 5px #ccc;
@@ -41,16 +41,16 @@ export const Td = styled.td`
     }
 `;
 
-const Grid = ({ users, setUsers, setOnEdit }) => {
+const Grid = ({ vendas, setVendas, setOnEdit }) => {
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:8080/users/' + id);
-      const newArray = users.filter((user) => user.id !== id);
-      setUsers(newArray);
+      await axios.delete('http://localhost:8080/vendas/' + id);
+      const newArray = vendas.filter((venda) => venda.id !== id);
+      setVendas(newArray);
       toast.success('Usuário deletado com sucesso!');
     } catch (error) {
       toast.error('Erro ao deletar o usuário!');
@@ -63,15 +63,21 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>id</Th>
-          <Th>nome</Th>
+          <Th>Id</Th>
+          <Th>Nome comprador</Th>
+          <Th>Produto</Th>
+          <Th>Quantidade</Th>
+          <Th>Preço total</Th>
         </Tr>
       </Thead>
       <Tbody>
-        {users.map((item, i) => (
+        {vendas.map((item, i) => (
           <Tr key={i}>
             <Td alignCenter>{item.id}</Td>
             <Td alignCenter>{item.name}</Td>
+            <Td alignCenter>{item.produto.name}</Td>
+            <Td alignCenter>{item.quantity}</Td>
+            <Td alignCenter>{item.price}</Td>
             <Td alignCenter>
               {/* Adicionar o evento de clique para editar */}
               <FaEdit onClick={() => handleEdit(item)} style={{ cursor: "pointer" }} />
