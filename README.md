@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Frontend para API de CRUD de Vendas, Produtos e Usuários
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é um frontend simples desenvolvido em **ReactJS** para consumir uma API que realiza operações de **CRUD (Create, Read, Update, Delete)** envolvendo vendas, produtos e usuários. Ele foi criado com o objetivo de fornecer uma interface amigável e intuitiva para gerenciar essas entidades, permitindo que os usuários realizem operações como adicionar novos produtos, registrar vendas e gerenciar informações de clientes.
 
-## Available Scripts
+## Tecnologias Utilizadas
 
-In the project directory, you can run:
+O projeto faz uso de diversas bibliotecas do ecossistema React para otimizar a interface e melhorar a experiência do usuário. Algumas das principais tecnologias e bibliotecas utilizadas foram:
 
-### `npm start`
+- **styled-components**: Utilizado para a estilização de componentes de forma modular e reutilizável, permitindo o uso de CSS-in-JS.
+- **axios**: Biblioteca para realizar requisições HTTP de forma simples e eficiente, facilitando a comunicação com a API backend.
+- **react-toastify**: Implementado para exibir notificações amigáveis ao usuário, indicando sucessos ou erros nas operações CRUD.
+- **react-icons**: Fornece ícones personalizáveis de alta qualidade para enriquecer a interface visual do projeto.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Funcionalidades
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Gerenciamento de Produtos**: Adicione, edite, remova e visualize produtos no sistema.
+- **Registro de Vendas**: Crie novas vendas associando produtos a clientes, garantindo a atualização automática dos estoques.
+- **Gerenciamento de Usuários**: Adicione, edite, remova e visualize os dados dos usuários/clientes.
 
-### `npm test`
+## Estrutura do Projeto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+O código foi organizado para ser simples e direto, com componentes reutilizáveis, facilitando a manutenção e a escalabilidade do projeto. A estilização é feita de maneira moderna, utilizando `styled-components` para garantir uma personalização fácil dos estilos sem conflitos de escopo.
 
-### `npm run build`
+## Contribuições são bem-vindas!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Sinta-se à vontade para abrir issues ou enviar pull requests para melhorar o projeto.
