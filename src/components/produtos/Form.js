@@ -47,7 +47,7 @@ const FormProduto = ({ getProdutos, onEdit, setOnEdit }) => {
   useEffect(() => {
     if (onEdit) {
       const produto = ref.current;
-      produto.nome.value = onEdit.name; // Corrigido para 'name'
+      produto.name.value = onEdit.name; // Corrigido para 'name'
       produto.quantidade.value = onEdit.quantidade;
       produto.preco.value = onEdit.preco;
     }
@@ -72,7 +72,12 @@ const FormProduto = ({ getProdutos, onEdit, setOnEdit }) => {
 
     try {
       if (onEdit) {
-        await axios.put(`http://localhost:8080/produtos/${onEdit.id}`, produtoData);
+        await axios.put(`http://localhost:8080/produtos/${onEdit.id}`, {
+          id: onEdit.id,
+          name: produto.name.value,
+          quantidade: parseInt(produto.quantidade.value, 10),
+          preco: parseFloat(produto.preco.value),
+        });
         toast.success("Produto atualizado com sucesso!");
       } else {
         await axios.post("http://localhost:8080/produtos", produtoData);
