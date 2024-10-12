@@ -12,6 +12,7 @@ const Global = createGlobalStyle`
         height: 100vh;
         display: flex;
         justify-content: center;
+        align-items: center;    
         background-color: #f2f2f2;
     }
 `;
