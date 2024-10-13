@@ -13,6 +13,7 @@ const FormContainer = styled.form`
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
   width: 360px;
+  justify-content: center;
 `;
 
 const InputArea = styled.div`
@@ -89,7 +90,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label>Nome</Label>
-        <Input name="name" /> {/* Corrigido para 'name' */}
+        <Input name="name" />
       </InputArea>
 
       <Button type="submit">SALVAR</Button>

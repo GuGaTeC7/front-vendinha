@@ -67,7 +67,7 @@ function App() {
   const getVendas = async () => {
     try {
       const res = await axios.get("http://localhost:8080/vendas");
-      setProdutos(res.data.sort((a, b) => a.id - b.id));
+      setVendas(res.data.sort((a, b) => a.id - b.id));
     } catch (error) {
       toast.error(error.message);
     }
@@ -76,6 +76,7 @@ function App() {
   useEffect(() => {
     getUsers();
     getProdutos();
+    getVendas();
   }, []); // Apenas roda ao montar o componente
 
   return (
@@ -95,17 +96,17 @@ function App() {
         </Container>
 
         {/* Vendas */}
-        {/* <Container>
+        <Container>
           <Title>VENDAS</Title>
-          <FormVenda onEdit={onEditVenda} setOnEdit={setOnEditVenda} getVendas={getVendas} />
-        </Container> */}
+          <FormVenda onEdit={onEditVenda} setOnEdit={setOnEditVenda} getVendas={getVendas} getProdutos={getProdutos}/>
+        </Container>
         </ContainerForms>
 
 
         <ContainerGrids>
           <GridUser users={users} setUsers={setUsers} setOnEdit={setOnEditUser} />
           <GridProduto produtos={produtos} setProdutos={setProdutos} setOnEdit={setOnEditProduto} />
-          {/* <GridVenda vendas={vendas} setVendas={setVendas} setOnEdit={setOnEditVenda} /> */}
+          <GridVenda vendas={vendas} setVendas={setVendas} setOnEdit={setOnEditVenda} />
         </ContainerGrids>
 
       </ContainerGeral>

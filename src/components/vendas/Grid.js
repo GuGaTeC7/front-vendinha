@@ -74,18 +74,18 @@ const Grid = ({ vendas, setVendas, setOnEdit }) => {
         {vendas.map((item, i) => (
           <Tr key={i}>
             <Td alignCenter>{item.id}</Td>
-            <Td alignCenter>{item.name}</Td>
+            <Td alignCenter>{item.user.name}</Td>
             <Td alignCenter>{item.produto.name}</Td>
             <Td alignCenter>{item.quantity}</Td>
             <Td alignCenter>{item.price}</Td>
-            <Td alignCenter>
-              {/* Adicionar o evento de clique para editar */}
+            {/* <Td alignCenter>
+              // Adicionar o evento de clique para editar
               <FaEdit onClick={() => handleEdit(item)} style={{ cursor: "pointer" }} />
-            </Td>
-            <Td alignCenter>
-              {/* Adicionar o evento de clique para deletar */}
+            </Td> */}
+            {/* <Td alignCenter>
+              // Adicionar o evento de clique para deletar
               <FaTrash onClick={() => handleDelete(item.id)} style={{ cursor: "pointer" }} />
-            </Td>
+            </Td> */}
           </Tr>
         ))}
       </Tbody>

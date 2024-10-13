@@ -13,15 +13,17 @@ const FormContainer = styled.form`
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
   width: 460px;
+  justify-content: center;
 `;
 
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Input = styled.input`
-  width: 245px;
+  width: 90px;
   padding: 0 10px;
   border: 1px solid #bbb;
   border-radius: 5px;
@@ -40,7 +42,7 @@ const Button = styled.button`
   height: 42px;
 `;
 
-const Form = ({ getVendas, onEdit, setOnEdit }) => {
+const Form = ({ getVendas, onEdit, setOnEdit, getProdutos }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -55,7 +57,7 @@ const Form = ({ getVendas, onEdit, setOnEdit }) => {
 
     const venda = ref.current;
 
-    if (!venda.name.value) {
+    if (!venda.name.value || !venda.produto.value || !venda.quantidade.value) {
       return toast.warn("Preencha todos os campos!");
     }
 
@@ -64,18 +66,21 @@ const Form = ({ getVendas, onEdit, setOnEdit }) => {
         name: venda.name.value,
       });
       try {
-        toast.success("Usuário atualizado com sucesso!");
+        toast.success("Venda atualizada com sucesso!");
       } catch (error) {
         toast.error("Erro ao atualizar!");
       }
     } else {
       await axios.post("http://localhost:8080/vendas", {
-        name: venda.name.value,
+        userId: venda.name.value,
+        produtoId: venda.produto.value,
+        quantity: venda.quantidade.value,
       });
       try {
-        toast.success("Usuário criado com sucesso!");
+        getProdutos()
+        toast.success("Venda criada com sucesso!");
       } catch (error) {
-        toast.error("Erro ao criar usuário!");
+        toast.error("Erro ao criar venda!");
       }
     }
 
@@ -88,8 +93,16 @@ const Form = ({ getVendas, onEdit, setOnEdit }) => {
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Nome</Label>
-        <Input name="name" /> {/* Corrigido para 'name' */}
+        <Label>Id do usuário</Label>
+        <Input name="name" />
+      </InputArea>
+      <InputArea>
+        <Label>Id do produto</Label>
+        <Input name="produto" />
+      </InputArea>
+      <InputArea>
+        <Label>Quantidade</Label>
+        <Input name="quantidade" />
       </InputArea>
 
       <Button type="submit">SALVAR</Button>
