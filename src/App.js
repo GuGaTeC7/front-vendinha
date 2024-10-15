@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const Container = styled.div`
-  width: 100%;
+  width: 101%;
   max-width: 800px;
   display: flex;
   flex-direction: column;
@@ -20,9 +20,14 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const ContainerForms = styled.div`
+const ContainerDataUsers = styled.div`
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  width: 500px;
+`;
+const ContainerData = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const ContainerGrids = styled.div`
@@ -31,8 +36,10 @@ const ContainerGrids = styled.div`
 
 const ContainerGeral = styled.div`
   display: flex;
-  flex-direction: column;
-`; 
+  gap: 30px;
+  justify-content: center;
+
+`;
 
 const Title = styled.h2``;
 
@@ -41,10 +48,10 @@ function App() {
   const [onEditUser, setOnEditUser] = useState(null);
 
   const [produtos, setProdutos] = useState([]);
-  const [onEditProduto, setOnEditProduto] = useState(null); 
+  const [onEditProduto, setOnEditProduto] = useState(null);
 
   const [vendas, setVendas] = useState([]);
-  const [onEditVenda, setOnEditVenda] = useState(null); 
+  const [onEditVenda, setOnEditVenda] = useState(null);
 
   const getUsers = async () => {
     try {
@@ -54,7 +61,7 @@ function App() {
       toast.error(error.message);
     }
   };
-  
+
   const getProdutos = async () => {
     try {
       const res = await axios.get("http://localhost:8080/produtos");
@@ -82,35 +89,63 @@ function App() {
   return (
     <>
       <ContainerGeral>
-        <ContainerForms>
-        {/* Usuários */}
-        <Container>
-          <Title>USUÁRIOS</Title>
-          <FormUser onEdit={onEditUser} setOnEdit={setOnEditUser} getUsers={getUsers} />
-        </Container>
+        <ContainerDataUsers>
+          {/* Usuários */}
+          <Container>
+            <Title>USUÁRIOS</Title>
+            <FormUser
+              onEdit={onEditUser}
+              setOnEdit={setOnEditUser}
+              getUsers={getUsers}
+            />
+          </Container>
 
-        {/* Produtos */}
-        <Container>
-          <Title>PRODUTOS</Title>
-          <FormProduto onEdit={onEditProduto} setOnEdit={setOnEditProduto} getProdutos={getProdutos} />
-        </Container>
+          <GridUser
+            users={users}
+            setUsers={setUsers}
+            setOnEdit={setOnEditUser}
+          />
+        </ContainerDataUsers>
 
-        {/* Vendas */}
-        <Container>
-          <Title>VENDAS</Title>
-          <FormVenda onEdit={onEditVenda} setOnEdit={setOnEditVenda} getVendas={getVendas} getProdutos={getProdutos}/>
-        </Container>
-        </ContainerForms>
+        <ContainerData>
+          {/* Produtos */}
+          <Container>
+            <Title>PRODUTOS</Title>
+            <FormProduto
+              onEdit={onEditProduto}
+              setOnEdit={setOnEditProduto}
+              getProdutos={getProdutos}
+            />
 
+            <GridProduto
+              produtos={produtos}
+              setProdutos={setProdutos}
+              setOnEdit={setOnEditProduto}
+            />
+          </Container>
+        </ContainerData>
 
-        <ContainerGrids>
-          <GridUser users={users} setUsers={setUsers} setOnEdit={setOnEditUser} />
-          <GridProduto produtos={produtos} setProdutos={setProdutos} setOnEdit={setOnEditProduto} />
-          <GridVenda vendas={vendas} setVendas={setVendas} setOnEdit={setOnEditVenda} />
-        </ContainerGrids>
+        <ContainerData>
+          {/* Vendas */}
+          <Container>
+            <Title>VENDAS</Title>
+            <FormVenda
+              onEdit={onEditVenda}
+              setOnEdit={setOnEditVenda}
+              getVendas={getVendas}
+              getProdutos={getProdutos}
+            />
+            <GridVenda
+              vendas={vendas}
+              setVendas={setVendas}
+              setOnEdit={setOnEditVenda}
+            />
+          </Container>
+        </ContainerData>
 
+        <ContainerGrids></ContainerGrids>
       </ContainerGeral>
-      
+
       <ToastContainer autoClose={3000} position="bottom-left" />
       <GlobalStyle />
     </>

@@ -9,10 +9,9 @@ const FormContainer = styled.form`
   gap: 10px;
   flex-wrap: wrap;
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
-  width: 360px;
   justify-content: center;
 `;
 
@@ -22,7 +21,6 @@ const InputArea = styled.div`
 `;
 
 const Input = styled.input`
-  width: 245px;
   padding: 0 10px;
   border: 1px solid #bbb;
   border-radius: 5px;
@@ -47,7 +45,11 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   useEffect(() => {
     if (onEdit) {
       const user = ref.current;
-      user.name.value = onEdit.name;  // Corrigido para 'name'
+      user.name.value = onEdit.name;
+      user.senha.value = onEdit.password;
+      user.email.value = onEdit.email;
+      user.cpfCnpj.value = onEdit.cpfCnpj;
+      user.status.value = onEdit.isActive ? "1" : "0"; // Ajuste para exibir 1 ou 0 baseado em isActive
     }
   }, [onEdit]);
 
@@ -56,34 +58,41 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
     const user = ref.current;
 
-    if (!user.name.value) {
+    if (!user.name.value || !user.senha.value || !user.email.value || !user.cpfCnpj.value || !user.status.value) {
       return toast.warn("Preencha todos os campos!");
     }
 
-    if (onEdit) {
-      await axios.put("http://localhost:8080/users/" + onEdit.id, {
+    try {
+      const payload = {
         name: user.name.value,
-      });
-      try {
+        password: user.senha.value,
+        email: user.email.value,
+        cpfCnpj: user.cpfCnpj.value,
+      };
+      const isActive = user.status.value
+
+      if (onEdit) {
+        await axios.put(`http://localhost:8080/users/${onEdit.id}`, payload);
+        await axios.put(`http://localhost:8080/users/${onEdit.id}/status/${isActive}`, {
+          
+        });
         toast.success("Usuário atualizado com sucesso!");
-      } catch (error) {
-        toast.error("Erro ao atualizar!");
-      }
-    } else {
-      await axios.post("http://localhost:8080/users", {
-        name: user.name.value,
-      });
-      try {
+      } else {
+        await axios.post("http://localhost:8080/users", payload);
         toast.success("Usuário criado com sucesso!");
-      } catch (error) {
-        toast.error("Erro ao criar usuário!");
       }
+
+      user.name.value = "";
+      user.senha.value = "";
+      user.email.value = "";
+      user.cpfCnpj.value = "";
+      user.status.value = "";
+
+      setOnEdit(null);
+      getUsers();
+    } catch (error) {
+      toast.error("Erro ao salvar o usuário!");
     }
-
-    user.name.value = "";
-
-    setOnEdit(null);
-    getUsers();
   };
 
   return (
@@ -91,6 +100,22 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       <InputArea>
         <Label>Nome</Label>
         <Input name="name" />
+      </InputArea>
+      <InputArea>      
+        <Label>Senha</Label>
+        <Input name="senha" />
+      </InputArea>
+      <InputArea>
+        <Label>Email</Label>
+        <Input name="email" />
+      </InputArea>
+      <InputArea>
+        <Label>Cpf/Cnpj</Label>
+        <Input name="cpfCnpj" />
+      </InputArea>
+      <InputArea>
+        <Label>Status</Label>
+        <Input name="status" placeholder="0 (inativo) ou 1 (ativo)" />
       </InputArea>
 
       <Button type="submit">SALVAR</Button>
