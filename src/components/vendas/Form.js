@@ -77,7 +77,7 @@ const Form = ({ getVendas, onEdit, setOnEdit, getProdutos }) => {
         quantity: venda.quantidade.value,
       });
       try {
-        getProdutos()
+        getProdutos();
         toast.success("Venda criada com sucesso!");
       } catch (error) {
         toast.error("Erro ao criar venda!");
@@ -85,6 +85,8 @@ const Form = ({ getVendas, onEdit, setOnEdit, getProdutos }) => {
     }
 
     venda.name.value = "";
+    venda.produto.value = "";
+    venda.quantidade.value = "";
 
     setOnEdit(null);
     getVendas();

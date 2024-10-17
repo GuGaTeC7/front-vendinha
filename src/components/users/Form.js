@@ -58,7 +58,13 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
     const user = ref.current;
 
-    if (!user.name.value || !user.senha.value || !user.email.value || !user.cpfCnpj.value || !user.status.value) {
+    if (
+      !user.name.value ||
+      !user.senha.value ||
+      !user.email.value ||
+      !user.cpfCnpj.value ||
+      !user.status.value
+    ) {
       return toast.warn("Preencha todos os campos!");
     }
 
@@ -68,14 +74,16 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         password: user.senha.value,
         email: user.email.value,
         cpfCnpj: user.cpfCnpj.value,
+        isActive: Number(user.status.value, 10),
       };
-      const isActive = user.status.value
+      const isActive = user.status.value;
 
       if (onEdit) {
         await axios.put(`http://localhost:8080/users/${onEdit.id}`, payload);
-        await axios.put(`http://localhost:8080/users/${onEdit.id}/status/${isActive}`, {
-          
-        });
+        await axios.put(
+          `http://localhost:8080/users/${onEdit.id}/status/${isActive}`,
+          {}
+        );
         toast.success("Usuário atualizado com sucesso!");
       } else {
         await axios.post("http://localhost:8080/users", payload);
@@ -101,9 +109,9 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Nome</Label>
         <Input name="name" />
       </InputArea>
-      <InputArea>      
+      <InputArea>
         <Label>Senha</Label>
-        <Input name="senha" />
+        <Input name="senha" type="password" />
       </InputArea>
       <InputArea>
         <Label>Email</Label>
